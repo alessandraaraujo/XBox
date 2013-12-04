@@ -18,9 +18,5 @@ public abstract class Device {
     public Device(){
         //construtor default
     }
-    /*
-     * acao executada pelo device
-     */
-    public abstract void acao();
     
 }

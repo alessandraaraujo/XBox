@@ -1,6 +1,7 @@
 
 package br.ufpa.progamacaoii.xbox;
 
+import br.ufpa.progamacaoii.xbox.data.Data;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -58,6 +59,11 @@ public abstract class XBox extends Device {
      * jogos virtuais armazenados
      */
     protected List<String> jogos;
+    /*
+     * data de fabricacao do XBox.
+     * nao pode ser constante devido a nao permissao de inicializacao do mesmo nos construtores.
+     */
+    protected Data fabricacao;
     
     public XBox(){        
         discoLocal = 100000;//100 Gb
@@ -76,13 +82,37 @@ public abstract class XBox extends Device {
         qtNucleos = 4;
         tipo = "eletronico";
         jogoRodando = "";
+        this.fabricacao = new Data(1,1,2013);
         jogos = new ArrayList<>();
     }
+    /*
+     * construtor de copia
+     */
+    public XBox(XBox xbox){
+        this.discoLocal = xbox.discoLocal;
+        this.gpu = xbox.gpu;
+        this.jogoRodando = xbox.jogoRodando;
+        this.jogos = xbox.jogos;
+        this.kinect = xbox.kinect;
+        this.memRam = xbox.memRam;
+        this.nome = xbox.nome;
+        this.qtControles = xbox.qtControles;
+        this.qtNucleos = xbox.qtNucleos;
+        this.tipo = xbox.tipo;
+        this.fabricacao = xbox.fabricacao;
+    }
+    public XBox(Data data){        
+        this.fabricacao = new Data(1,1,2013);
+    }
+    /*
+     * cada XBox vai rodar os seus jogos de modo diferente
+     */
+    public abstract void rodarJogo();
     
     /*
      * conecta a central da XBox Live
      */    
-    public void conectaCentral() throws InterruptedException{
+    public boolean conectaCentral() throws InterruptedException{
         
         Random gerador = new Random();
         
@@ -104,9 +134,11 @@ public abstract class XBox extends Device {
         
         Thread.sleep(5000);
         
-        if( gerador.nextInt(2) == 0 )
-            JOptionPane.showMessageDialog(null, "\nDownload completado com sucesso. Base de dados local atualizada",
+        if( gerador.nextInt(2) == 0 ) {
+            JOptionPane.showMessageDialog(null, "\nDownload completado com sucesso.\nBase de dados local atualizada\nConectado a XBox Live!!\n",
                         "Banco de Dados Atualizado", JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        }
         else {
             pane = new JOptionPane("\nConexão abortada.\nExecutando Rollback...");
             final JDialog dialogAux = pane.createDialog(null, "Falha na Atualização");
@@ -129,15 +161,21 @@ public abstract class XBox extends Device {
                 JOptionPane.showMessageDialog(null, "\nFalha ao executar Rollback. Base de dados local inconsistente.",
                         "Erro", JOptionPane.ERROR_MESSAGE);
         }
-        
+        return false;
     }
+    
     /*
      * roda a midia fisica
      */
     protected void rodaMidiaFisica(){
         
+        if(jogoRodando.equals("") || jogoRodando == null){
+            JOptionPane.showMessageDialog(null, "\nSem midia fisica\n","Midia Fisica",JOptionPane.ERROR_MESSAGE);
+            return;
+        }            
+        
         JOptionPane pane = new JOptionPane("\nAtualmente executando o jogo "+jogoRodando+"\n");
-        final JDialog dialog = pane.createDialog(null, "Executando");  
+        final JDialog dialog = pane.createDialog(null, "Midia Fisica");  
         dialog.setModal(true);
         //timer. Insere um tempo de vida para o JOptionPane
         Timer timer = new Timer(10 * 700, new ActionListener() {            
@@ -156,6 +194,15 @@ public abstract class XBox extends Device {
      */
     protected void rodaMidiaVirtual(){
         
+        /*
+         * verificacao de seguranca.
+         * se nao houver nenhuma midia na memoria secundaria.
+         */
+        if(jogos.size() == 0)
+            if(JOptionPane.showConfirmDialog(null, "\nSem midias virtuais no disco local.\n\nAdicionar?","Midias Virtuais",JOptionPane.YES_NO_OPTION) == 0 )
+                if(!addMidiaVirtual())
+                    return;        
+        
         String texto = "";
         
         for(int i = 0; i<jogos.size(); i++)
@@ -173,10 +220,17 @@ public abstract class XBox extends Device {
     /*
      * adiciona uma midia virtual
      */
-    public void addMidiaVirtual(){
-        String jogo = JOptionPane.showInputDialog(null, "\nInforme qual o jogo a ser armazenado\n","Midias Virtuais",JOptionPane.INFORMATION_MESSAGE);
-        if(!jogo.equals(""))
+    public boolean addMidiaVirtual(){
+        String jogo = JOptionPane.showInputDialog(null, "\nInforme qual o jogo a ser armazenado\n","Adicionar Midia Virtual",JOptionPane.INFORMATION_MESSAGE);
+        if(!jogo.equals("")){
             jogos.add(jogo);
+            return true;
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "\nMidia Inválida\n","Adicionar Midia Virtual",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
     }
     
     public void usarKinect(){
@@ -252,5 +306,5 @@ public abstract class XBox extends Device {
         }
         
     }
-    
+        
 }

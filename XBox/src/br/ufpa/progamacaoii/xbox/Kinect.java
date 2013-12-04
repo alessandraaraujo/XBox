@@ -50,8 +50,7 @@ public class Kinect {
                 +"\nY -> "+y+"\nZ -> "+z+"\n","Kinect: "+equipamento.nome,JOptionPane.DEFAULT_OPTION);        
         }
         else
-            JOptionPane.showMessageDialog(null, "\nKinect ativo\n\nNenhum objeto detectado\n","",JOptionPane.DEFAULT_OPTION);            
-        
+            JOptionPane.showMessageDialog(null, "\nKinect ativo\n\nNenhum objeto detectado\n","",JOptionPane.DEFAULT_OPTION);        
     }
     
     public boolean isAtivo() {

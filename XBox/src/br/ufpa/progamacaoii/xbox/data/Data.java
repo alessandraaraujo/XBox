@@ -1,5 +1,5 @@
 
-package br.ufpa.programacaoii.data;
+package br.ufpa.progamacaoii.xbox.data;
 
 /**
  *
