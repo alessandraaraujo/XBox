@@ -1,5 +1,6 @@
 package br.ufpa.progamacaoii.xbox;
 
+import br.ufpa.progamacaoii.xbox.data.Data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,7 +22,7 @@ public class XBoxOne extends XBox{
      * indica se o usuario esta online
      */
     private boolean online;
-            
+
     public XBoxOne(){
         super();//construtor da classe pai
         //valores default        
@@ -30,6 +31,11 @@ public class XBoxOne extends XBox{
     
     public XBoxOne(XBoxOne xbox){
         super( /*(XBox)*/ xbox);//um XBox One eh um XBox (cast nao eh obrigatorio, mas se quiser usar tbm funciona :) )
+        this.canais = xbox.canais;        
+    }
+    
+    public XBoxOne(Data data,XBoxOne xbox){
+        super(data, /*(XBox)*/ xbox);//um XBox One eh um XBox (cast nao eh obrigatorio, mas se quiser usar tbm funciona :) )
         this.canais = xbox.canais;        
     }
         
@@ -46,7 +52,7 @@ public class XBoxOne extends XBox{
                 if (JOptionPane.showConfirmDialog(null, "\nUsar kinect?\n","Iniciando...",JOptionPane.YES_NO_OPTION) == 0 ){
                     if(kinect == null)
                         kinect = new Kinect();
-                    kinect.usar(this);
+                    usarKinect();
                 }
                 
                 rodaMidiaFisica();
@@ -64,7 +70,7 @@ public class XBoxOne extends XBox{
          * verificacao de seguranca.
          * se nao houver nenhuma canal na memoria secundaria.
          */
-        if(canais.size() == 0)
+        if(canais.isEmpty())
             if(JOptionPane.showConfirmDialog(null, "\nSem canais registrados.\n\nAdicionar?","TV",JOptionPane.YES_NO_OPTION) == 0 )
                 if(!addCanal())
                     return;
@@ -109,6 +115,90 @@ public class XBoxOne extends XBox{
         } catch (InterruptedException ex) {
             Logger.getLogger(XBoxOne.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public double getMemRam() {
+        return memRam;
+    }
+
+    public void setMemRam(double memRam) {
+        this.memRam = memRam;
+    }
+
+    public double getDiscoLocal() {
+        return discoLocal;
+    }
+
+    public void setDiscoLocal(double discoLocal) {
+        this.discoLocal = discoLocal;
+    }
+
+    public double getGpu() {
+        return gpu;
+    }
+
+    public void setGpu(double gpu) {
+        this.gpu = gpu;
+    }
+
+    public int getQtNucleos() {
+        return qtNucleos;
+    }
+
+    public void setQtNucleos(int qtNucleos) {
+        this.qtNucleos = qtNucleos;
+    }
+
+    public int getQtControles() {
+        return qtControles;
+    }
+
+    public void setQtControles(int qtControles) {
+        this.qtControles = qtControles;
+    }
+
+    public Kinect getKinect() {
+        return kinect;
+    }
+
+    public void setKinect(Kinect kinect) {
+        this.kinect = kinect;
+    }
+
+    public String getJogoRodando() {
+        return jogoRodando;
+    }
+
+    public void setJogoRodando(String jogoRodando) {
+        this.jogoRodando = jogoRodando;
+    }
+
+    public List<String> getJogos() {
+        return jogos;
+    }
+
+    public void setJogos(List<String> jogos) {
+        this.jogos = jogos;
+    }
+
+    public Data getFabricacao() {
+        return fabricacao;
+    }
+
+    public List<String> getCanais() {
+        return canais;
+    }
+
+    public void setCanais(List<String> canais) {
+        this.canais = canais;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
     }
     
 }

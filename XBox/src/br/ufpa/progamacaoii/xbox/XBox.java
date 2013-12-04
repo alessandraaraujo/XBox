@@ -35,7 +35,7 @@ public abstract class XBox extends Device {
     /*
      * quantidade de nucleos na cpu
      */
-    protected double qtNucleos;
+    protected int qtNucleos;
     
     /*
      * quantidade de controles atualmente conectados
@@ -101,8 +101,24 @@ public abstract class XBox extends Device {
         this.tipo = xbox.tipo;
         this.fabricacao = xbox.fabricacao;
     }
-    public XBox(Data data){        
+    /*
+     * construtor de copia com dois argumentos
+     */
+    public XBox(Data data,XBox xbox){
+        
         this.fabricacao = new Data(1,1,2013);
+        this.discoLocal = xbox.discoLocal;
+        this.gpu = xbox.gpu;
+        this.jogoRodando = xbox.jogoRodando;
+        this.jogos = xbox.jogos;
+        this.kinect = xbox.kinect;
+        this.memRam = xbox.memRam;
+        this.nome = xbox.nome;
+        this.qtControles = xbox.qtControles;
+        this.qtNucleos = xbox.qtNucleos;
+        this.tipo = xbox.tipo;
+        this.fabricacao = xbox.fabricacao;
+        
     }
     /*
      * cada XBox vai rodar os seus jogos de modo diferente
@@ -121,6 +137,7 @@ public abstract class XBox extends Device {
         dialog.setModal(true);
         //timer. Insere um tempo de vida para o JOptionPane
         Timer timer = new Timer(10 * 500, new ActionListener() {            
+            @Override
             public void actionPerformed(ActionEvent ev) {  
                 dialog.dispose();
             }            
@@ -145,6 +162,7 @@ public abstract class XBox extends Device {
             dialogAux.setModal(true);
             //timer. Insere um tempo de vida para o JOptionPane
             timer = new Timer(10 * 500, new ActionListener() {            
+                @Override
                 public void actionPerformed(ActionEvent ev) {  
                     dialogAux.dispose();
                 }            
@@ -179,6 +197,7 @@ public abstract class XBox extends Device {
         dialog.setModal(true);
         //timer. Insere um tempo de vida para o JOptionPane
         Timer timer = new Timer(10 * 700, new ActionListener() {            
+            @Override
             public void actionPerformed(ActionEvent ev) {  
                 dialog.dispose();
             }            
@@ -198,7 +217,7 @@ public abstract class XBox extends Device {
          * verificacao de seguranca.
          * se nao houver nenhuma midia na memoria secundaria.
          */
-        if(jogos.size() == 0)
+        if(jogos.isEmpty())
             if(JOptionPane.showConfirmDialog(null, "\nSem midias virtuais no disco local.\n\nAdicionar?","Midias Virtuais",JOptionPane.YES_NO_OPTION) == 0 )
                 if(!addMidiaVirtual())
                     return;        
@@ -243,6 +262,7 @@ public abstract class XBox extends Device {
             dialog.setModal(true);
             //timer. Insere um tempo de vida para o JOptionPane
             Timer timer = new Timer(10 * 100, new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent ev) {  
                     dialog.dispose();
                 }            
@@ -274,6 +294,7 @@ public abstract class XBox extends Device {
             dialog.setModal(true);
             //timer. Insere um tempo de vida para o JOptionPane
             Timer timer = new Timer(10 * 100, new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent ev) {  
                     dialog.dispose();
                 }            

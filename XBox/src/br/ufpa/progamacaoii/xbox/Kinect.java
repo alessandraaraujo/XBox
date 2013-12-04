@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
  *
  * @author Moisés Felipe
  */
-public class Kinect {
+public class Kinect extends Device{
     
     /*
      * indica se o kinect esta ativo
@@ -28,6 +28,8 @@ public class Kinect {
         x = null;
         y = null;
         z = null;
+        tipo = "eletronico";
+        nome = "kinect";
     }
     /*
      * construtor de copia
@@ -37,6 +39,8 @@ public class Kinect {
         x = kinect.x;
         y = kinect.y;
         z = kinect.z;
+        tipo = kinect.tipo;
+        nome = kinect.nome;
     }
     /*
      * modo de utilizar o kinect através do equipamento

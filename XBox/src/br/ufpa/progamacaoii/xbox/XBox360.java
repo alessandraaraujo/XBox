@@ -1,6 +1,8 @@
 package br.ufpa.progamacaoii.xbox;
 
 import static br.ufpa.progamacaoii.xbox.XBox.maxControles;
+import br.ufpa.progamacaoii.xbox.data.Data;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +24,10 @@ public class XBox360 extends XBox{
         super( (XBox) xbox );//usando cast
     }
     
+    public XBox360(Data data,XBox360 xbox){
+        super( data,(XBox) xbox );//usando cast
+    }
+
     @Override
     public void rodarJogo(){
         
@@ -35,7 +41,7 @@ public class XBox360 extends XBox{
                 if (JOptionPane.showConfirmDialog(null, "\nUsar kinect?\n","Iniciando...",JOptionPane.YES_NO_OPTION) == 0 ){
                     if(kinect == null)
                         kinect = new Kinect();
-                    kinect.usar(this);
+                    usarKinect();
                 }
                 
                 rodaMidiaFisica();
@@ -47,6 +53,72 @@ public class XBox360 extends XBox{
             rodaMidiaVirtual();
     }
     
-    
-    
+    public double getMemRam() {
+        return memRam;
+    }
+
+    public void setMemRam(double memRam) {
+        this.memRam = memRam;
+    }
+
+    public double getDiscoLocal() {
+        return discoLocal;
+    }
+
+    public void setDiscoLocal(double discoLocal) {
+        this.discoLocal = discoLocal;
+    }
+
+    public double getGpu() {
+        return gpu;
+    }
+
+    public void setGpu(double gpu) {
+        this.gpu = gpu;
+    }
+
+    public int getQtNucleos() {
+        return qtNucleos;
+    }
+
+    public void setQtNucleos(int qtNucleos) {
+        this.qtNucleos = qtNucleos;
+    }
+
+    public int getQtControles() {
+        return qtControles;
+    }
+
+    public void setQtControles(int qtControles) {
+        this.qtControles = qtControles;
+    }
+
+    public Kinect getKinect() {
+        return kinect;
+    }
+
+    public void setKinect(Kinect kinect) {
+        this.kinect = kinect;
+    }
+
+    public String getJogoRodando() {
+        return jogoRodando;
+    }
+
+    public void setJogoRodando(String jogoRodando) {
+        this.jogoRodando = jogoRodando;
+    }
+
+    public List<String> getJogos() {
+        return jogos;
+    }
+
+    public void setJogos(List<String> jogos) {
+        this.jogos = jogos;
+    }
+
+    public Data getFabricacao() {
+        return fabricacao;
+    }
+
 }
