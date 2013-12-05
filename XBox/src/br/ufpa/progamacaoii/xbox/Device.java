@@ -3,8 +3,10 @@ package br.ufpa.progamacaoii.xbox;
 /**
  *
  * @author Moisés Felipe
+ * 
+ * 
  */
-public abstract class Device {
+public abstract class Device { //Classe ok
     
     /*
      * tipo de device
