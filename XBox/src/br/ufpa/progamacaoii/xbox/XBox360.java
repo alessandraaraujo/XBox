@@ -9,23 +9,24 @@ import javax.swing.JOptionPane;
  *
  * @author Moisés Felipe
  */
-public class XBox360 extends XBox{
+public class XBox360 extends XBox{ 
     
     /*
      * construtor vazio
      */
     public XBox360(){
-        super();
+        super(); //chama o construtor da classe pai
     }
     /*
      * construtor de copia
      */
-    public XBox360(XBox360 xbox){
-        super( (XBox) xbox );//usando cast
+	 
+    public XBox360(XBox360 xbox){ //usa o construtor de copia da classe pai
+        super( (XBox) xbox );//usando cast 
     }
     
-    public XBox360(Data data,XBox360 xbox){
-        super( data,(XBox) xbox );//usando cast
+    public XBox360(Data data,XBox360 xbox){ //usa o construtor de cópia de dois paramentros da classe pai. Obejeto data é passado como paramentro, mas nao é usada dentro do metodo
+        super( data,(XBox) xbox );//usando cast -> cast tb pode ser dispensado aqui.
     }
 
     @Override

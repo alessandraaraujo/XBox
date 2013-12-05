@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
  *
  * @author Moisés Felipe
  */
-public class Kinect extends Device{
+public class Kinect extends Device{ //Classe ok
     
     /*
      * indica se o kinect esta ativo

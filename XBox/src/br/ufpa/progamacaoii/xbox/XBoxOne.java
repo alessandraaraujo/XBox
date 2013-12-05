@@ -29,12 +29,12 @@ public class XBoxOne extends XBox{
         this.canais = new ArrayList<>();        
     }
     
-    public XBoxOne(XBoxOne xbox){
+    public XBoxOne(XBoxOne xbox){ //usa construtor da classe pai
         super( /*(XBox)*/ xbox);//um XBox One eh um XBox (cast nao eh obrigatorio, mas se quiser usar tbm funciona :) )
         this.canais = xbox.canais;        
     }
     
-    public XBoxOne(Data data,XBoxOne xbox){
+    public XBoxOne(Data data,XBoxOne xbox){ //usa construtor da classe pai. Passagem do objeto data desnecessaria pq não é usado dentro do método.
         super(data, /*(XBox)*/ xbox);//um XBox One eh um XBox (cast nao eh obrigatorio, mas se quiser usar tbm funciona :) )
         this.canais = xbox.canais;        
     }

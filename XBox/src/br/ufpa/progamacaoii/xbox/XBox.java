@@ -104,7 +104,7 @@ public abstract class XBox extends Device {
     /*
      * construtor de copia com dois argumentos
      */
-    public XBox(Data data,XBox xbox){
+    public XBox(Data data,XBox xbox){ //nao faz sentido usar o parametro Data data, uma vez que ele não está sendo usado no método.
         
         this.fabricacao = new Data(1,1,2013);
         this.discoLocal = xbox.discoLocal;
@@ -128,7 +128,7 @@ public abstract class XBox extends Device {
     /*
      * conecta a central da XBox Live
      */    
-    public boolean conectaCentral() throws InterruptedException{
+    public boolean conectaCentral() throws InterruptedException{  //lança um tratamento
         
         Random gerador = new Random();
         
@@ -254,6 +254,7 @@ public abstract class XBox extends Device {
     
     public void usarKinect(){
 
+		//roda midia fisica.
         if (JOptionPane.showConfirmDialog(null, "\nUsar midia virtual?\n","Iniciando Kinect",JOptionPane.YES_NO_OPTION) == 0 ){
             
             JOptionPane pane = new JOptionPane("\nAtivando Kinect...\n", JOptionPane.DEFAULT_OPTION);
@@ -275,7 +276,7 @@ public abstract class XBox extends Device {
             
             if(kinect == null)
                 kinect = new Kinect();
-            
+            //seta com valores aleatorios as coordenadas do kinect
             kinect.setX(new Random().nextDouble());
             kinect.setY(new Random().nextDouble());
             kinect.setZ(new Random().nextDouble());
@@ -287,6 +288,7 @@ public abstract class XBox extends Device {
             if(kinect.isAtivo())
                 kinect.setAtivo(false);
         }
+		//roda midia virtual.
         else{
             
             JOptionPane pane = new JOptionPane("\nAtivando Kinect...\n", JOptionPane.DEFAULT_OPTION);
@@ -311,7 +313,7 @@ public abstract class XBox extends Device {
                 
                 if(kinect == null)
                     kinect = new Kinect();
-            
+				//seta com valores aleatorios as coordenadas do kinect
                 kinect.setX(new Random().nextDouble());
                 kinect.setY(new Random().nextDouble());
                 kinect.setZ(new Random().nextDouble());
